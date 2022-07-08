@@ -7,7 +7,7 @@
   "fileMatch": [
     "config/**/fragments.json"
   ],
-  "version": "1.0",
+  "version": "1.1",
   "properties": {
     "version": {
       "description": "Configuration version. Must be a valid semver.",
@@ -34,16 +34,23 @@
       "minItems": 1,
       "uniqueItems": true
     },
-    "wrapper-classes": {
-      "description": "Wrapper classes",
+    "container-attributes": {
+      "description": "Container attributes",
       "type": "object",
       "properties": {
-        "immutable": {
-          "$ref": "#/definitions/css-classes"
-        },
-        "default": {
-          "$ref": "#/definitions/css-classes"
+        "class": {
+          "description": "Container CSS classes",
+          "type": "object",
+          "properties": {
+            "immutable": {
+              "$ref": "#/definitions/css-classes"
+            },
+            "default": {
+              "$ref": "#/definitions/css-classes"
+            }
+          }
         }
+        
       }
     },
     "accordion": {
@@ -68,12 +75,12 @@
       "description": "A theme used for a fragment",
       "type": "object",
       "properties": {
-        "wrapper_classes": {
-          "$ref": "#/definitions/wrapper-classes"
+        "wrapper": {
+          "$ref": "#/definitions/container-attributes"
         }
       },
       "required": [
-        "wrapper_classes"
+        "wrapper"
       ]
     }
   },
