@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/mediaconstructor/json-schema-store/main/schemas/redaxo/fragment-config.schema.json",
+  "title": "redaxo-fragment-config",
+  "description": "Config file for redaxo fragments within the mc_fragments addon.",
+  "type": "object",
+  "fileMatch": [
+    "config/**/fragments.json"
+  ],
+  "version": "1.0",
+  "properties": {
+    "version": {
+      "description": "Configuration version. Must be a valid semver.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "fragments": {
+      "description": "Contains configuration for fragments",
+      "type": "object",
+      "properties": {
+        "accordion": {
+          "$ref": "#/definitions/accordion"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "css-classes": {
+      "description": "CSS classes assigned to HTML elements",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "wrapper-classes": {
+      "description": "Wrapper classes",
+      "type": "object",
+      "properties": {
+        "immutable": {
+          "$ref": "#/definitions/css-classes"
+        },
+        "default": {
+          "$ref": "#/definitions/css-classes"
+        }
+      }
+    },
+    "accordion": {
+      "description": "Configuration for the accordion fragment.",
+      "type": "object",
+      "required": [
+        "themes"
+      ],
+      "properties": {
+        "themes": {
+          "description": "A list of themes, having the theme's id as the object's key",
+          "type": "object",
+          "patternProperties": {
+            "^\\d+$": {
+              "$ref": "#/definitions/theme"
+            }
+          }
+        }
+      }
+    },
+    "theme": {
+      "description": "A theme used for a fragment",
+      "type": "object",
+      "properties": {
+        "wrapper_classes": {
+          "$ref": "#/definitions/wrapper-classes"
+        }
+      },
+      "required": [
+        "wrapper_classes"
+      ]
+    }
+  },
+  "required": [
+    "version"
+  ]
+}
