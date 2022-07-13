@@ -80,7 +80,8 @@
         }
       },
       "required": [
-        "wrapper"
+        "name",
+        "containers"
       ]
     }
   },
